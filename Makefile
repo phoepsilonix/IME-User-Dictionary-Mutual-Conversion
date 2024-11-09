@@ -28,11 +28,13 @@ COMMAND    = userdic
 VERSION    = 1.0
 DISTDIR    = userdic-${VERSION}
 
-${COMMAND}: userdic.rb hinshi.rb normkana.rb
+${COMMAND}: userdic.rb hinshi.rb normkana.rb hinshi.py
 	./userdic.rb build > $@
 	chmod +x $@
 hinshi.rb: hinshi mkhinshi.rb
 	./mkhinshi.rb < hinshi > $@
+hinshi.py: hinshi.rb python_hinshi.rb
+	ruby python_hinshi.rb > hinshi.py
 
 mozc:  ${UD_MOZC}
 google:${UD_MOZC}
